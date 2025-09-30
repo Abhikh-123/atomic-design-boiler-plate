@@ -1,0 +1,24 @@
+{
+  "greeting": "Hello, Welcome To Intracis!",
+  "description": {
+    "line1": " <1>{{channel}}</1>  Project",
+    "line2": "Cybersecurity incident tracking systems are the tools and processes used to detect, report, and manage cyber-attacks and security breaches . These systems help organizations identify potential threats, respond to incidents, and prevent future attacks."
+  },
+  "project_for": "Real Time Incident Tracking System",
+  "add-project": "Add Project",
+  "home": "Home",
+  "about": "About",
+  "report": "Report",
+  "Intracis": "Intracis",
+  "project": "Project",
+  "enterprojectname": "Enter Project Name",
+  "enterteamleadname": "Enter TeamLead Name",
+  "delete": "Delete",
+  "edit": "Edit",
+  "search": "Search",
+  "clear": "Clear",
+  "login":"Login",
+  "logout":"LogOut",
+  "back":"Back",
+  "maincontent": "Cybersecurity incident tracking systems are the tools and processes used to detect, report, and manage cyber-attacks and security breaches . These systems help organizations identify potential threats, respond to incidents, and prevent future attacks."
+}
