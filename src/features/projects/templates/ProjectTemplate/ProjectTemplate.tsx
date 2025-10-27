@@ -4,6 +4,14 @@ import SearchBar from '../../../projects/molicule/SearchBar/SearchBar';
 import ProjectList from '../../organisms/ProjectList/ProjectList';
 import { useTranslation } from 'react-i18next';
 
+
+type Project = {
+  id: number;
+  title: string;
+  body: string;
+
+};
+
 type ProjectTemplateProps = {
   title: string;
   onAddClick: () => void;
@@ -11,7 +19,7 @@ type ProjectTemplateProps = {
   onSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSearchClick: () => void;
   onClearClick: () => void;
-  projects: [];
+  projects: Project[];
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
 };

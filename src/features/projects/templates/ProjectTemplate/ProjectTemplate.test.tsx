@@ -4,7 +4,10 @@ import ProjectTemplate from '../ProjectTemplate/ProjectTemplate';
 type Project = {
   id: number;
   title: string;
+  body: string;
+
 };
+
 
 type ProjectTemplateProps = {
   title: string;
@@ -13,8 +16,11 @@ type ProjectTemplateProps = {
   searchTerm: string;
   className: string;
   children: string;
+  projects: Project[];
   onSearchClick: () => void;
   onClearClick: () => void;
+  onEdit : (id: number) => void;
+  onDelete:(id: number)=>void;
 };
 
 jest.mock(
@@ -64,6 +70,11 @@ jest.mock('react-i18next', () => ({
 }));
 
 describe('ProjectTemplate', () => {
+
+const mockProjects: Project[] = [{ id: 1, title: 'Project One',body :''}];
+
+
+
   const mockProps = {
     title: 'My Projects',
     onAddClick: jest.fn(),
@@ -71,7 +82,7 @@ describe('ProjectTemplate', () => {
     onSearchChange: jest.fn(),
     onSearchClick: jest.fn(),
     onClearClick: jest.fn(),
-    projects: [{ id: 1, title: 'Project One' }],
+    projects:mockProjects,
     onEdit: jest.fn(),
     onDelete: jest.fn(),
   };

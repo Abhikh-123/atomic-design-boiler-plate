@@ -49,7 +49,11 @@ const Project = () => {
             setSearchTerm('');
             setSearchQuery('');
           }}
-          projects={filteredData}
+          // projects={filteredData}
+           projects={filteredData.map((p) => ({
+    ...p,
+    id: Number(p.id), // ✅ Convert id to number
+  }))}
           onEdit={handleEditClick}
           onDelete={handleDelete}
         />

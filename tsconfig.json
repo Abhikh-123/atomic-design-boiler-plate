@@ -10,7 +10,8 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "target": "ES2019",
-    "moduleResolution": "node",
+    // "moduleResolution": "node",
+        "moduleResolution": "bundler",
     "module": "ESNext",
     "allowJs": true,
     "noEmit": true,
