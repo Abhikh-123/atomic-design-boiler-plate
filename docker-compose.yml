@@ -1,0 +1,9 @@
+version: "3.9"
+
+services:
+  web:
+    image: login-with-tailwind
+    container_name: login-with-tailwind-container
+    ports:
+      - "3000:80"
+    restart: always

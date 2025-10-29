@@ -18,6 +18,7 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "strictNullChecks": true,
+    "skipLibCheck": true,
     "jsx": "react-jsx",
     "baseUrl": "./",
     "types": ["node", "jest", "cypress", "@testing-library/cypress"]
