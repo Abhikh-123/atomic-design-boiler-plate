@@ -48,7 +48,7 @@ jest.mock(
       <h1>{props.title}</h1>
       <button onClick={props.onAddClick}>Add</button>
       <input
-        placeholder="searc"
+        placeholder="search"
         value={props.searchTerm}
         onChange={props.onSearchChange}
       />
