@@ -1,3 +1,13 @@
+# version: "3.9"
+
+# services:
+#   web:
+#     image: login-with-tailwind
+#     container_name: login-with-tailwind-container
+#     ports:
+#       - "4149:80"
+#     restart: always
+
 version: "3.9"
 
 services:
@@ -7,3 +17,19 @@ services:
     ports:
       - "4149:80"
     restart: always
+    depends_on:
+      - jsonserver
+
+  jsonserver:
+    image: node:18
+    container_name: json-server-container
+    working_dir: /app
+    volumes:
+      - ./src/assets/db.json:/app/db.json
+    command: >
+      bash -c "npm install -g json-server &&
+               json-server --host 0.0.0.0 --port 3001 --watch db.json"
+    ports:
+      - "3001:3001"
+    restart: always
+

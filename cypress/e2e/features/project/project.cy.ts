@@ -53,7 +53,7 @@ describe("Project Page", () => {
     cy.url().should("include", "/");
   });
   it("should NOT show 'No matching projects found.' when API returns projects", () => {
-      cy.intercept("GET", "http://localhost:3000/posts", {
+      cy.intercept("GET", "http://localhost:3001/posts", {
         statusCode: 200,
         body: [
           { id: 1, title: "Project One", body: "Some description" },
@@ -71,7 +71,7 @@ describe("Project Page", () => {
 
   describe("ProjectList dynamic test", () => {
   it("should check response and assert accordingly", () => {
-    cy.intercept("GET", "http://localhost:3000/posts").as("getProjects");
+    cy.intercept("GET", "http://localhost:3001/posts").as("getProjects");
 
     cy.visit("/project");
     cy.wait("@getProjects").then((interception) => {
@@ -93,7 +93,7 @@ describe("Project Page", () => {
   describe("ProjectList dynamic test", () => {
     // not good for ci/cd 
   it("should handle both success and empty state", () => {
-    cy.intercept("GET", "http://localhost:3000/posts", (req) => {
+    cy.intercept("GET", "http://localhost:3001/posts", (req) => {
       req.reply({
         statusCode: Math.random() > 0.5 ? 200 : 500, // randomly success or fail
         body: Math.random() > 0.5 ? [
@@ -117,7 +117,7 @@ describe("Project Page", () => {
 
 describe("ProjectList conditional test", () => {
   it("should show projects if API returns data, otherwise show empty state", () => {
-    cy.intercept("GET", "http://localhost:3000/posts", (req) => {
+    cy.intercept("GET", "http://localhost:3001/posts", (req) => {
       req.reply({
         statusCode: 200,
         body: Math.random() > 0.5 // random to simulate success/empty state

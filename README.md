@@ -8,6 +8,9 @@ npm run dev
 
 json-server --watch <file path >
 
+for this project -  json-server --watch ./src/assets/db.json --port 3001 --host 0.0.0.0
+
+
 e.g. json-server --watch src/assets/db.json
 
 <!-- for unit testing (jest/react testing library)  -->

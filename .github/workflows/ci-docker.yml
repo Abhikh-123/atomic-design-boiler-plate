@@ -98,34 +98,34 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-  deploy:
-    needs: build-and-push
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v5
+  # deploy:
+  #   needs: build-and-push
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/main'
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v5
 
-      # Copy docker-compose.yml to server
-      - name: Copy docker-compose to server
-        uses: appleboy/scp-action@v0.1.6
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          source: "docker-compose.yml"
-          target: "~/app/"
+  #     # Copy docker-compose.yml to server
+  #     - name: Copy docker-compose to server
+  #       uses: appleboy/scp-action@v0.1.6
+  #       with:
+  #         host: ${{ secrets.SERVER_IP }}
+  #         username: ${{ secrets.SERVER_USER }}
+  #         key: ${{ secrets.SERVER_SSH_KEY }}
+  #         source: "docker-compose.yml"
+  #         target: "~/app/"
 
-      # Restart container on server
-      - name: Deploy on Server via SSH
-        uses: appleboy/ssh-action@v0.1.5
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            cd ~/app
-            docker-compose pull
-            docker-compose down
-            docker-compose up -d
+  #     # Restart container on server
+  #     - name: Deploy on Server via SSH
+  #       uses: appleboy/ssh-action@v0.1.5
+  #       with:
+  #         host: ${{ secrets.SERVER_IP }}
+  #         username: ${{ secrets.SERVER_USER }}
+  #         key: ${{ secrets.SERVER_SSH_KEY }}
+  #         script: |
+  #           cd ~/app
+  #           docker-compose pull
+  #           docker-compose down
+  #           docker-compose up -d
 

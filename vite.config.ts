@@ -13,4 +13,9 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "./jest.setup.ts",
   },
+  define: {
+    'globalThis.fetch': 'fetch',
+  },
 });
+
+
