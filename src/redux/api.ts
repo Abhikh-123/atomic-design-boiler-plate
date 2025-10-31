@@ -54,7 +54,7 @@ export const myApi = createApi({
   reducerPath: 'myApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:3001/',
-    fetchFn: fetch,    
+    // fetchFn: fetch,    
   }),
   tagTypes: ['Posts'],
   endpoints: (builder) => ({

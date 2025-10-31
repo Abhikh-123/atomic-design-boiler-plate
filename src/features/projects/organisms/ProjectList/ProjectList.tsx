@@ -21,12 +21,12 @@ const ProjectList = ({ projects, onEdit, onDelete }: ProjectListProps) => {
             key={project.id}
             post={project}
             onEdit={() => onEdit(project.id)}
-            // onDelete={() => onDelete(project.id)}
-            onDelete={() => {
-              if (window.confirm("Are you sure you want to delete this project?")) {
-                onDelete(project.id);
-              }
-            }}
+            onDelete={() => onDelete(project.id)}
+            // onDelete={() => {
+            //   if (window.confirm("Are you sure you want to delete this project?")) {
+            //     onDelete(project.id);
+            //   }
+            // }}
             
           />
         ))
