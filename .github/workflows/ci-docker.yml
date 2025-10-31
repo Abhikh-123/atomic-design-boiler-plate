@@ -32,16 +32,26 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
+      # ✅ Optional: test SSH connection before deployment
+      - name: Test SSH Connection
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: echo "✅ SSH connection successful"
+
+      # ✅ Copy project files to remote server
       - name: Copy project files to server
         uses: appleboy/scp-action@v0.1.6
         with:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
-          script: ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "echo connection successful"
           source: "."
           target: "~/app/"
 
+      # ✅ Build and deploy via SSH
       - name: Build and Deploy via SSH
         uses: appleboy/ssh-action@v0.1.5
         with:
@@ -49,13 +59,13 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            # Ensure the deployment folder exists
+            set -e
+            echo "🚀 Starting deployment..."
             mkdir -p ~/app
             cd ~/app
-
-            # Build Docker images locally on the server
+            echo "📦 Building Docker images..."
             docker-compose build --no-cache
-
-            # Restart containers with latest images
+            echo "♻️ Restarting containers..."
             docker-compose down
             docker-compose up -d
+            echo "✅ Deployment completed successfully!"
