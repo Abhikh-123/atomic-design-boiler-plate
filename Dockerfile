@@ -1,6 +1,6 @@
 
 # Stage 1: Build the Vite app
-FROM node:18 AS build
+FROM node:20 AS build
 
 # Set working directory
 WORKDIR /app

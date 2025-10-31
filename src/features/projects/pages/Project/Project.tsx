@@ -40,7 +40,7 @@ const Project = () => {
         <div>Loading...</div>
       ) : (
         <ProjectTemplate
-          title={t('project')}
+          title={t('project1')}
           onAddClick={handleAddClick}
           searchTerm={searchTerm}
           onSearchChange={(e) => setSearchTerm(e.target.value)}
@@ -50,10 +50,10 @@ const Project = () => {
             setSearchQuery('');
           }}
           // projects={filteredData}
-           projects={filteredData.map((p) => ({
-    ...p,
-    id: Number(p.id), // ✅ Convert id to number
-  }))}
+          projects={filteredData.map((p) => ({
+            ...p,
+            id: Number(p.id), // ✅ Convert id to number
+          }))}
           onEdit={handleEditClick}
           onDelete={handleDelete}
         />
