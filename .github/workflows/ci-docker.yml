@@ -19,36 +19,52 @@ jobs:
           node-version: 18
           cache: npm
 
-      - run: npm ci
-      - run: npm run format
-      - run: npm run lint
-      - run: npm test -- --watchAll=false
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Format code
+        run: npm run format
+
+      - name: Lint code
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test -- --watchAll=false
 
   deploy:
     needs: ci
-    runs-on: self-hosted     
+    runs-on: self-hosted
     if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      - name: Deploy using Docker Compose
+      - name: Deploy using Docker Compose (Fresh)
         run: |
           set -e
-          echo "🚀 Starting deployment..."
+          echo "🚀 Starting fresh deployment..."
+          
+          # Ensure deployment directory exists
           cd ~/app || mkdir -p ~/app && cd ~/app
-
+          
+          # Sync project files from repo
           echo "📦 Copying updated project files..."
           rsync -a --delete $GITHUB_WORKSPACE/ ~/app/
-
+          
+          # Stop and remove old containers, volumes, and networks
           echo "🛑 Stopping and removing old containers..."
           docker-compose down -v --remove-orphans
-
+          
+          # Optional: remove dangling images to avoid conflicts
+          echo "🗑️ Removing dangling Docker images..."
+          docker image prune -f
+          
+          # Build fresh Docker images
           echo "📦 Building Docker images..."
           docker-compose build --no-cache
-
-          echo "♻️ Restarting containers..."
-          docker-compose down
+          
+          # Start containers fresh
+          echo "♻️ Starting containers..."
           docker-compose up -d
-
-          echo "✅ Deployment completed successfully!"
+          
+          echo "✅ Fresh deployment completed successfully!"
