@@ -41,6 +41,9 @@ jobs:
           echo "📦 Copying updated project files..."
           rsync -a --delete $GITHUB_WORKSPACE/ ~/app/
 
+          echo "🛑 Stopping and removing old containers..."
+          docker-compose down -v --remove-orphans
+
           echo "📦 Building Docker images..."
           docker-compose build --no-cache
 
